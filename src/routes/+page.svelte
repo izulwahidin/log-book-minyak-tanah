@@ -68,7 +68,7 @@
   
   function editTransaksi(index: number) {
     // Get actual index in the full transaksi array based on filtered view
-    const actualIndex = transaksi.findIndex(t => t.id === filteredTransaksi[index].id);
+    const actualIndex = transaksi.findIndex(t => t.id === filteredTransaksi()[index].id);
     if (actualIndex !== -1) {
       editingTransaksi = actualIndex;
     }
