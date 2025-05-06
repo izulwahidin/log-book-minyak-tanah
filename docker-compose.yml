@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  sveltekit:
+    build:
+      context: ./sveltekit
+    ports:
+      - "3000:3000"
+    depends_on:
+      - pocketbase
+    environment:
+      POCKETBASE_URL: http://pocketbase:8090
+    restart: unless-stopped
+
+  pocketbase:
+    build:
+      context: ./pocketbase
+    ports:
+      - "8090:8080"
+    volumes:
+      - ./pocketbase/pb_data:/pb/pb_data
+    restart: unless-stopped
