@@ -1,36 +1,46 @@
 <script lang="ts">
-    let {onSubmit, initialData} = $props()
+	import type { Transaksi } from "$lib/types";
+
+    let {
+      onSubmit, 
+      initialData = null as Transaksi | null
+    } = $props();
     
     // Form state
-    let formData = $state({
-      tanggal: new Date().toISOString().slice(0, 10),
-      nama: '',
-      alamat: '',
-      nik: '',
-      jumlahPembelian: ''
+    let formData: Transaksi = $state({
+      tanggal: '',
+      user: {
+        name: '',
+        alamat: '',
+        nik: '',
+        ktp_image: ''
+      },
+      jumlahPembelian: 0,
+      stokID: 0,
+      generatedFrom: null
     });
     
+    // Initialize form with initial data if provided
     if (initialData) {
-    formData = { ...initialData };
+      formData = { ...initialData };
     }
-
-$effect(()=>{
-  console.log("formData",formData)
-})
     
-    
-    function handleSubmit() {
+    function handleSubmit(e: Event) {
+      e.preventDefault(); // Prevent default form submission
+      
       // Validate form
-      if (!formData.tanggal || !formData.nama || !formData.alamat || 
-          !formData.nik || !formData.jumlahPembelian) {
+      if (!formData.tanggal || !formData.user.name || !formData.user.alamat || 
+          !formData.user.nik || !formData.jumlahPembelian) {
         alert('Semua kolom harus diisi!');
         return;
       }
       
-      // Convert jumlahPembelian to number
+      // Convert jumlahPembelian to number if it's a string
       const submissionData = {
         ...formData,
-        jumlahPembelian: Number(formData.jumlahPembelian)
+        jumlahPembelian: typeof formData.jumlahPembelian === 'string' 
+          ? Number(formData.jumlahPembelian) 
+          : formData.jumlahPembelian
       };
       
       // Submit data to parent
@@ -40,10 +50,15 @@ $effect(()=>{
       if (!initialData) {
         formData = {
           tanggal: '',
-          nama: '',
-          alamat: '',
-          nik: '',
-          jumlahPembelian: ''
+          user: {
+            name: '',
+            alamat: '',
+            nik: '',
+            ktp_image: ''
+          },
+          jumlahPembelian: 0,
+          stokID: 0,
+          generatedFrom: null
         };
       }
     }
@@ -52,7 +67,7 @@ $effect(()=>{
   <div class="bg-gray-100 p-4 rounded-lg mb-6">
     <h3 class="font-semibold text-lg mb-4">{initialData ? 'Edit Transaksi' : 'Tambah Transaksi Baru'}</h3>
     
-    <form onsubmit={handleSubmit} class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form on:submit={handleSubmit} class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="mb-2">
         <label class="block text-gray-700 mb-1" for="tanggal">Tanggal</label>
         <input 
@@ -70,7 +85,7 @@ $effect(()=>{
           id="nama" 
           class="w-full px-3 py-2 border rounded" 
           placeholder="Nama lengkap pembeli" 
-          bind:value={formData.nama}
+          bind:value={formData.user.name}
         />
       </div>
       
@@ -81,7 +96,7 @@ $effect(()=>{
           id="alamat" 
           class="w-full px-3 py-2 border rounded" 
           placeholder="Alamat lengkap" 
-          bind:value={formData.alamat}
+          bind:value={formData.user.alamat}
         />
       </div>
       
@@ -92,7 +107,7 @@ $effect(()=>{
           id="nik" 
           class="w-full px-3 py-2 border rounded" 
           placeholder="Nomor Induk Kependudukan" 
-          bind:value={formData.nik}
+          bind:value={formData.user.nik}
         />
       </div>
       

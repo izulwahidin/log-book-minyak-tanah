@@ -6,8 +6,6 @@
         onEdit
     } = $props()
     
-
-    // console.log(data)
     
     // Format date to DD/MM/YYYY
     function formatDate(dateString) {
@@ -40,7 +38,7 @@
             <tr class="border-b">
               <td class="py-2 px-4">{formatDate(item.tanggal)}</td>
               <td class="py-2 px-4">{item.user.name}</td>
-              <td class="py-2 px-4">{item.user.name}</td>
+              <td class="py-2 px-4">{item.user.nik}</td>
               <td class="py-2 px-4">{item.user.alamat}</td>
               <td class="py-2 px-4">{item.jumlahPembelian}</td>
               <td class="py-2 px-4">{item?.user.ktp_image}</td>

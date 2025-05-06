@@ -1,6 +1,8 @@
-<script>
+<script lang="ts">
+	import type { Stok } from "$lib/types";
+
     let {
-        data = [], 
+        data = [] as Stok[], 
         onDelete, 
         onEdit
     } = $props()
@@ -23,10 +25,10 @@
         <thead class="bg-gray-200">
           <tr>
             <th class="py-2 px-4 text-left">Tanggal</th>
-            <th class="py-2 px-4 text-left">Jumlah Minyak (Liter)</th>
-            <th class="py-2 px-4 text-left">Sisa Minyak (Liter)</th>
+            <!-- <th class="py-2 px-4 text-left">Jumlah Minyak (Liter)</th>
+            <th class="py-2 px-4 text-left">Sisa Minyak (Liter)</th> -->
             <th class="py-2 px-4 text-left">Stok Masuk (Liter)</th>
-            <th class="py-2 px-4 text-left">Stok Keluar (Liter)</th>
+            <!-- <th class="py-2 px-4 text-left">Stok Keluar (Liter)</th> -->
             <th class="py-2 px-4 text-left">Aksi</th>
           </tr>
         </thead>
@@ -34,10 +36,10 @@
           {#each data as item, index}
             <tr class="border-b">
               <td class="py-2 px-4">{formatDate(item.tanggal)}</td>
-              <td class="py-2 px-4">{item.jumlahMinyak}</td>
-              <td class="py-2 px-4">{item.sisaMinyak}</td>
+              <!-- <td class="py-2 px-4">{item.jumlahMinyak}</td>
+              <td class="py-2 px-4">{item.sisaMinyak}</td> -->
               <td class="py-2 px-4">{item.stokMasuk}</td>
-              <td class="py-2 px-4">{item.stokKeluar}</td>
+              <!-- <td class="py-2 px-4">{item.stokKeluar}</td> -->
               <td class="py-2 px-4">
                 <button 
                   class="bg-yellow-500 text-white px-2 py-1 rounded mr-2"

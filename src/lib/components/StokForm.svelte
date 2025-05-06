@@ -4,10 +4,7 @@
     // Form state
     let formData = $state({
       tanggal: '',
-      jumlahMinyak: '',
-      sisaMinyak: '',
       stokMasuk: '',
-      stokKeluar: ''
     });
     
     if (initialData) {
@@ -17,10 +14,7 @@
     function handleSubmit() {
       // Validate form
       if (!formData.tanggal || 
-          formData.jumlahMinyak === '' || 
-          formData.sisaMinyak === '' || 
-          formData.stokMasuk === '' || 
-          formData.stokKeluar === '') {
+          formData.stokMasuk === '') {
         alert('Semua kolom harus diisi!');
         return;
       }
@@ -28,10 +22,7 @@
       // Convert string values to numbers
       const submissionData = {
         ...formData,
-        jumlahMinyak: Number(formData.jumlahMinyak),
-        sisaMinyak: Number(formData.sisaMinyak),
-        stokMasuk: Number(formData.stokMasuk),
-        stokKeluar: Number(formData.stokKeluar)
+        stokMasuk: Number(formData.stokMasuk)
       };
       
       // Submit data to parent
@@ -41,10 +32,7 @@
       if (!initialData) {
         formData = {
           tanggal: '',
-          jumlahMinyak: '',
-          sisaMinyak: '',
           stokMasuk: '',
-          stokKeluar: ''
         };
       }
     }
@@ -64,29 +52,6 @@
         />
       </div>
       
-      <div class="mb-2">
-        <label class="block text-gray-700 mb-1" for="jumlahMinyak">Jumlah Minyak (Liter)</label>
-        <input 
-          type="number" 
-          id="jumlahMinyak" 
-          class="w-full px-3 py-2 border rounded" 
-          placeholder="Total jumlah minyak" 
-          min="0" 
-          bind:value={formData.jumlahMinyak}
-        />
-      </div>
-      
-      <div class="mb-2">
-        <label class="block text-gray-700 mb-1" for="sisaMinyak">Sisa Minyak (Liter)</label>
-        <input 
-          type="number" 
-          id="sisaMinyak" 
-          class="w-full px-3 py-2 border rounded" 
-          placeholder="Sisa stok saat ini" 
-          min="0" 
-          bind:value={formData.sisaMinyak}
-        />
-      </div>
       
       <div class="mb-2">
         <label class="block text-gray-700 mb-1" for="stokMasuk">Stok Masuk (Liter)</label>
@@ -97,18 +62,6 @@
           placeholder="Stok yang masuk" 
           min="0" 
           bind:value={formData.stokMasuk}
-        />
-      </div>
-      
-      <div class="mb-2">
-        <label class="block text-gray-700 mb-1" for="stokKeluar">Stok Keluar (Liter)</label>
-        <input 
-          type="number" 
-          id="stokKeluar" 
-          class="w-full px-3 py-2 border rounded" 
-          placeholder="Stok yang keluar" 
-          min="0" 
-          bind:value={formData.stokKeluar}
         />
       </div>
       
