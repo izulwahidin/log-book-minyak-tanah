@@ -67,7 +67,7 @@
   <div class="bg-gray-100 p-4 rounded-lg mb-6">
     <h3 class="font-semibold text-lg mb-4">{initialData ? 'Edit Transaksi' : 'Tambah Transaksi Baru'}</h3>
     
-    <form on:submit={handleSubmit} class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <form onsubmit={handleSubmit} class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="mb-2">
         <label class="block text-gray-700 mb-1" for="tanggal">Tanggal</label>
         <input 
