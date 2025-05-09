@@ -1,20 +1,20 @@
 export interface Transaksi {
-    id?: number;
+    id: string;
     user: User
     tanggal: string;
     jumlahPembelian: number;
     generatedFrom: Transaksi["id"]|null;// i want to null or Transaksi.id
-    stokID: number;
+    stokID: string;
   }
   
   export interface Stok {
-    id?: number;
+    id: string;
     tanggal: string;
     stokMasuk: number;
   }
   
   export interface User {
-    id?: number,
+    id: string,
     name: string,
     nik: string,
     alamat: string,
